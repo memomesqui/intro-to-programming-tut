@@ -14,7 +14,7 @@ public class Food : MonoBehaviour
     {
         //creates random positions for the snake to catch and adding mathf.round to make sure it aligns with the grid
         Bounds bounds = this.gridArea.bounds;
-
+        //random positions in an x-y axis plane
         float x = Random.Range (bounds.min.x, bounds.max.x);
         float y = Random.Range (bounds.min.y, bounds.max.y);
 

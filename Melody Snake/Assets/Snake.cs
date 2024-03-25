@@ -49,7 +49,8 @@ public class Snake : MonoBehaviour
 
    private void FixedUpdate()
    {
-
+    //makes sure that all appearing segments move following the head so thats why it's iterated in reverse order, head stays in place and
+    //last piece moves behind it and then the piece bofore that one.
     for (int i = _segments.Count - 1; i > 0; i--)
     {
         _segments[i].position = _segments[i - 1].position;
@@ -98,12 +99,12 @@ public class Snake : MonoBehaviour
 
      private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        //food isn't an obstacle so it will grow here instead of reseting 
         if (other.tag == "Food")
         {
         Grow();
         } 
-        //making self and walls an onstacle so when self hits those you loose game
+        //making self and walls an obstacle so when self hits those you loose game
         else if (other.tag == "Obstacle"){
             ResetState();
         }
