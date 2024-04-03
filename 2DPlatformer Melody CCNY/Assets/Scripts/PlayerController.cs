@@ -60,9 +60,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Surface")
         {
             isJumping = false;
+            //Debug.Log("Collision 2D");
         }
 
-        //Debug.Log("Collision 2D");
+       
 
         if (collision.gameObject.tag == "Lava")
         {
