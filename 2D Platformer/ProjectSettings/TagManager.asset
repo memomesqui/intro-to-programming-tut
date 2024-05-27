@@ -8,6 +8,10 @@ TagManager:
   - Fall Detector
   - FallDetector
   - Checkpoint
+  - NextLevel
+  - PreviousLevel
+  - Crystal
+  - Boxes
   layers:
   - Default
   - TransparentFX

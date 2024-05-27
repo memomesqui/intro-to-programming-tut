@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//var to work with the different functions for loading scenes
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 respawnPoint;
     //var for linking script to fall detector thats in the scene to be tracked, fall detector moves wherever player moves
     public GameObject fallDetector;
+    //var for score in integers
+    private int score = 0;
 
     void Start()
     {
@@ -97,6 +101,38 @@ public class PlayerController : MonoBehaviour
             else if (collision.tag == "Checkpoint") 
             {
                 respawnPoint = transform.position;
+            }
+            //checkers for portal collisions to move between levels
+
+            else if(collision.tag == "NextLevel")
+            {
+                //finds out what scene i'm currently in... then adds one to load next scene because it works in indexes starting at 0
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                //when player is in new level the respawn point is updated to where they are currently
+                respawnPoint = transform.position;
+            }
+
+            else if(collision.tag == "PreviousLevel")
+            {
+                //does the opposite of the one above
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+                //when player is in new level the respawn point is updated to where they are currently
+                respawnPoint = transform.position;
+            }
+            //makes collision crystals dissapear after player collects them
+            else if(collision.tag == "Crystal")
+            {
+                score += 1;
+                Debug.Log(score);
+                collision.gameObject.SetActive(false);
+            }
+
+            else if(collision.tag == "Boxes")
+            {
+                score +=5;
+                Debug.Log(score);
+                collision.gameObject.SetActive(false);
+
             }
         }
 }
