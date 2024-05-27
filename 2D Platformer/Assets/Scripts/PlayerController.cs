@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
     //var for animator 
     private Animator playerAnimation;
+    //var for recording position where the player starts in game and if it dies, it'll respawn to that recorded position
+    private Vector3 respawnPoint;
+    //var for linking script to fall detector thats in the scene to be tracked, fall detector moves wherever player moves
+    public GameObject fallDetector;
 
     void Start()
     {
@@ -32,6 +36,8 @@ public class PlayerController : MonoBehaviour
         player = GetComponent<Rigidbody2D>();
         //for animator
         playerAnimation = GetComponent<Animator>();
+        //stores position of player before the first frame
+        respawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -48,12 +54,14 @@ public class PlayerController : MonoBehaviour
         {
             //direction positive val
             player.velocity = new Vector2(direction * speed, player.velocity.y);
+            //helps player move left when left is pressed
             transform.localScale = new Vector2(0.3049605f, 0.3049605f);
         }
         else if (direction < 0f) 
         {
             //direction negative val
             player.velocity = new Vector2(direction * speed, player.velocity.y);
+            //helps player move left when left is pressed
             transform.localScale = new Vector2(-0.3049605f, 0.3049605f);
 
         }
@@ -74,7 +82,16 @@ public class PlayerController : MonoBehaviour
         playerAnimation.SetFloat("Speed", Mathf.Abs(player.velocity.x));
         playerAnimation.SetBool("OnGround", isTouchingGround);
 
-
+        //x=players position... y=detector position so it catches the player sort of
+        fallDetector.transform.position = new Vector2 (transform.position.x, fallDetector.transform.position.y);
 
     }
+         //will be called whenever collision is detected
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.tag == "FallDetector")
+            {
+                transform.position = respawnPoint;
+            }
+        }
 }
