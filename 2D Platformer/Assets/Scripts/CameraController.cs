@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     //stores player position
     private Vector3 playerPosition;
     //
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         //updating position of the camera
         playerPosition = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
         
-        //if plater is looking right this will update player position
+        //if plater is looking right this will update player position as well as for the left
         if(player.transform.localScale.x > 0f)
         {
             playerPosition = new Vector3(playerPosition.x + offset, playerPosition.y, playerPosition.z);

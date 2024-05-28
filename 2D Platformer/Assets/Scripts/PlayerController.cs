@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 //var to work with the different functions for loading scenes
 using UnityEngine.SceneManagement;
+//creates access to ui
 using UnityEngine.UI;
+//creates access to text mesh pro
 using TMPro;
 using System;
 
@@ -34,8 +36,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 respawnPoint;
     //var for linking script to fall detector thats in the scene to be tracked, fall detector moves wherever player moves
     public GameObject fallDetector;
-    //var for Text onject
+    //var for Text onject... 
     public TMP_Text scoreText;
+
+    //getting access to healthbar script
+    public HealthBar healthBar;
 
     void Start()
     {
