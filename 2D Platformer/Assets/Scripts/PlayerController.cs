@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 //var to work with the different functions for loading scenes
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,8 +34,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 respawnPoint;
     //var for linking script to fall detector thats in the scene to be tracked, fall detector moves wherever player moves
     public GameObject fallDetector;
-    //var for score in integers
-    private int score = 0;
+    //var for Text onject
+    public TMP_Text scoreText;
 
     void Start()
     {
@@ -42,6 +45,8 @@ public class PlayerController : MonoBehaviour
         playerAnimation = GetComponent<Animator>();
         //stores position of player before the first frame
         respawnPoint = transform.position;
+        //initialize text to display current score
+        scoreText.text = "Score: " + KeepingScore.totalScore;
     }
 
     // Update is called once per frame
@@ -119,20 +124,21 @@ public class PlayerController : MonoBehaviour
                 //when player is in new level the respawn point is updated to where they are currently
                 respawnPoint = transform.position;
             }
-            //makes collision crystals dissapear after player collects them
+            //makes collision crystals n boxes dissapear after player collects them and keeps record of it even when movind to next level
             else if(collision.tag == "Crystal")
-            {
-                score += 1;
-                Debug.Log(score);
-                collision.gameObject.SetActive(false);
-            }
+           {
+            //    score += 1;
+              KeepingScore.totalScore +=1;
+              scoreText.text = "Score: " + KeepingScore.totalScore;
+              collision.gameObject.SetActive(false);
+           }
 
-            else if(collision.tag == "Boxes")
-            {
-                score +=5;
-                Debug.Log(score);
-                collision.gameObject.SetActive(false);
-
-            }
+           else if(collision.tag == "Boxes")
+           {
+            //    score += 1;
+              KeepingScore.totalScore +=5;
+              scoreText.text = "Score: " + KeepingScore.totalScore;
+              collision.gameObject.SetActive(false);
+           }
         }
 }
