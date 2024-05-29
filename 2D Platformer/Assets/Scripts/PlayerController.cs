@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
               collision.gameObject.SetActive(false);
            }
         }
-        //will be called whenever collision is detected when the player stays on the spikes
+        //will be called whenever collision is detected when the player stays on the spikes and will remove health
         private void OnTriggerStay2D (Collider2D collision)
         {
             if(collision.tag == "Spikes")

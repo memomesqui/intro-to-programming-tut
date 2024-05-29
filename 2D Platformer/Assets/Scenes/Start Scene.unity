@@ -1500,7 +1500,7 @@ GameObject:
   - component: {fileID: 802094098}
   - component: {fileID: 802094097}
   m_Layer: 0
-  m_Name: PortalOn
+  m_Name: Exiting Portal
   m_TagString: NextLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
